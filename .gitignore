@@ -24,3 +24,7 @@ hs_err_pid*
 
 #node
 node_modules/
+
+#idea 
+.idea/
+frontend/.idea/workspace.xml
