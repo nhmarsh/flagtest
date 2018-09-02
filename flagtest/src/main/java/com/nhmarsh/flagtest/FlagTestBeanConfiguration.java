@@ -1,5 +1,6 @@
 package com.nhmarsh.flagtest;
 
+import com.launchdarkly.client.LDClient;
 import com.nhmarsh.flagtest.entity.FeatureFlag;
 import com.nhmarsh.flagtest.repository.FlagRepository;
 import com.nhmarsh.flagtest.service.SpringInjectionTestService;
@@ -30,5 +31,11 @@ public class FlagTestBeanConfiguration {
         }
         System.out.println("ERROR: NO INJECTION VALUE FOUND");
         return null;
+    }
+
+    @Bean
+    public LDClient ldClient() {
+        LDClient ldClient = new LDClient("sdk-65d4d604-439d-4dd3-bea8-4d76473a58d6");
+        return ldClient;
     }
 }
