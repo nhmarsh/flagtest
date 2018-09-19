@@ -1,11 +1,13 @@
 package com.nhmarsh.flagtest;
 
+import com.launchdarkly.client.LDClient;
 import com.nhmarsh.flagtest.entity.FeatureFlag;
 import com.nhmarsh.flagtest.repository.FlagRepository;
 import com.nhmarsh.flagtest.service.SpringInjectionTestService;
 import com.nhmarsh.flagtest.service.impl.SpringInjectionTestServiceImplV1;
 import com.nhmarsh.flagtest.service.impl.SpringInjectionTestServiceImplV2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +18,9 @@ public class FlagTestBeanConfiguration {
 
     @Autowired
     private FlagRepository flagRepository;
+
+    @Value("${which_injected_service}")
+    private String featureInjectionFlag;
 
     @Bean
     public SpringInjectionTestService springInjectionTestService() {
@@ -30,5 +35,13 @@ public class FlagTestBeanConfiguration {
         }
         System.out.println("ERROR: NO INJECTION VALUE FOUND");
         return null;
+    }
+
+    @Bean
+    public LDClient ldClient() {
+
+        LDClient ldClient = new LDClient("sdk-65d4d604-439d-4dd3-bea8-4d76473a58d6");
+
+        return ldClient;
     }
 }
